@@ -1,0 +1,133 @@
+body{
+	margin: 0;
+	font-size: 1em;
+}
+
+header{
+	width: 100%;
+	height: auto;
+	margin: 0px;
+	display: flex;
+	justify-content: space-around;
+}
+
+header > div > h3{
+	margin: 10px 0;
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.25em;
+}
+
+nav{
+	width: 100%;
+	height: auto;
+	margin: 0;
+	display: flex;
+	justify-content: space-around;
+	background-color: #51007A;
+}
+
+nav > div{
+	width: 33.33%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+
+nav > div:hover{
+	background-color: rgb(68, 68, 68);
+	box-shadow: inset 6px 2px 26px 19px rgba(0,0,0,0.4);
+	cursor: pointer;
+	transition-property: background-color, box-shadow;
+}
+
+nav > div > h2{
+	margin: 10px;
+	font-family: 'Rajdhani', sans-serif;
+	font-size: 2em;
+	color: #FFFFFF;
+}
+
+section{
+	width: 100%;
+	height: auto;
+	padding: 7% 0;
+	display: flex;
+	justify-content: center;
+	background-color: rgb(162, 13, 221);
+}
+
+table{
+	width: 300px;
+	height: 500px;
+	padding: 5px;
+	border-spacing: 0;
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.25em;
+	color: #FFFFFF;
+	background-color: #FFFFFF;
+}
+
+.pantalla1{
+	height: 2.5em;
+	font-size: 1em;
+	text-align: right;
+	background-color: #51007A;
+}
+
+.pantalla2{
+	height: 2em;
+	font-size: 1.5em;
+	text-align: right;
+	background-color: #51007A;
+}
+
+.pantalla1 td, .pantalla2 td{
+	padding: 0 15px 0 0;
+}
+
+.boton{
+	width: 1em;
+	text-align: center;
+	background-color: rgb(124, 124, 124);
+	cursor: pointer;
+}
+
+.boton:hover{
+	box-shadow: inset 6px 2px 26px 19px rgba(255,255,255,0.15);
+}
+
+.boton:active{
+	box-shadow: inset 6px 2px 26px 19px rgba(0,0,0,0.15);
+}
+
+.operacion{
+	background-color: rgb(68, 68, 68);
+}
+
+footer{
+	width: 100%;
+	height: auto;
+	margin: 0;
+	display: flex;
+	justify-content: space-around;
+	background-color: rgb(68, 68, 68);
+}
+
+footer > div{
+	width: 50%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+footer > div > p{
+	text-align: justify;
+	margin: 0;
+	padding: 5%;
+	font-family: 'Rajdhani', sans-serif;
+	font-size: 1.25em;
+	color: #FFFFFF;
+}

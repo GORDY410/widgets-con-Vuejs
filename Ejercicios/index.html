@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+	<link rel="stylesheet" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&family=Rajdhani&display=swap" rel="stylesheet">
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+	<title>Mi página</title>
+</head>
+<body>
+	
+	<header>
+		<div id="reloj">
+			<h3>{{hora}}</h3>
+		</div>
+		<div id="fechas">
+			<h3>{{fecha}}</h3>
+		</div>
+	</header>
+
+	<nav>
+		<div>
+			<h2>Calculadora</h2>
+		</div>
+		<div>
+			<h2>Convertidor de divisa</h2>
+		</div>
+		<div>
+			<h2>Gato (3 en raya)</h2>
+		</div>
+	</nav>
+
+	<section>
+		<div id="calculadora">
+			<table>
+				<tbody>
+					<tr class="pantalla1">
+						<td colspan="4">{{pantallaSec}}</td>
+					</tr>
+					<tr class="pantalla2">
+						<td colspan="4">{{pantallaPrin}}</td>
+					</tr>
+					<tr>
+						<td class="boton operacion" v-on:click="operar('/')">/</td>
+						<td class="boton operacion" v-on:click="operar('*')">*</td>
+						<td class="boton operacion" v-on:click="borrarCaracter"><-</td>
+						<td class="boton operacion" v-on:click="limpiarPantallas">C</td>
+					</tr>
+					<tr>
+						<td class="boton" v-on:click="obtenerNumero(7)">7</td>
+						<td class="boton" v-on:click="obtenerNumero(8)">8</td>
+						<td class="boton" v-on:click="obtenerNumero(9)">9</td>
+						<td class="boton operacion" v-on:click="operar('-')">-</td>
+					</tr>
+					<tr>
+						<td class="boton" v-on:click="obtenerNumero(4)">4</td>
+						<td class="boton" v-on:click="obtenerNumero(5)">5</td>
+						<td class="boton" v-on:click="obtenerNumero(6)">6</td>
+						<td class="boton operacion" v-on:click="operar('+')">+</td>
+					</tr>
+					<tr>
+						<td class="boton" v-on:click="obtenerNumero(1)">1</td>
+						<td class="boton" v-on:click="obtenerNumero(2)">2</td>
+						<td class="boton" v-on:click="obtenerNumero(3)">3</td>
+						<td class="boton operacion" v-on:click="obtenerResul" rowspan="2">=</td>
+					</tr>
+					<tr>
+						<td class="boton" v-on:click="obtenerNumero(0)" colspan="2">0</td>
+						<td class="boton" v-on:click="obtenerNumero('.')">.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!--
+		<div id="divisa">
+			<form>
+				<div>
+					<label>Dolares:</label>
+					<input type="number">
+				</div>
+				<div>
+					<label>Pesos:</label>
+					<input type="number">
+				</div>
+				<button>Convertir</button>
+			</form>
+		</div>
+		-->
+	</section>
+
+	<footer>
+		<div>
+			<p>Desarrollado por Jordy Muñoz</p>
+		</div>
+		<div>
+			<p>
+				Esta página ha sido creada para el aprendizaje de Vue.js.
+			</p>
+		</div>
+	</footer>
+
+	<script src="behaivor.js"></script>
+</body>
+</html>
