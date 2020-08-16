@@ -58,7 +58,7 @@ section{
 	background-color: rgb(162, 13, 221);
 }
 
-table{
+.calculadora{
 	width: 300px;
 	height: 500px;
 	padding: 5px;
@@ -80,11 +80,20 @@ table{
 	background-color: #51007A;
 }
 
-.pantalla1 td, .pantalla2 td{
+.pantalla1 > td, .pantalla2 > td{
 	padding: 0 15px 0 0;
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.25em;
+	color: #FFFFFF;
 }
 
-.boton{
+.botones-calculadora > td{
+	width: auto;
+	height: auto;
+	padding: 0;
+}
+
+.boton-calculadora{
 	width: 75px;
 	height: 80.4px;
 	border: 0;
@@ -97,16 +106,86 @@ table{
 	cursor: pointer;
 }
 
-.boton:hover{
+.boton-calculadora:hover{
 	box-shadow: inset 6px 2px 26px 19px rgba(255,255,255,0.15);
 }
 
-.boton:active{
+.boton-calculadora:active{
 	box-shadow: inset 6px 2px 26px 19px rgba(0,0,0,0.15);
 }
 
 .operacion{
 	background-color: rgb(68, 68, 68);
+}
+
+.boton-calculadora-igual{
+	height: 160.8px;
+}
+
+.boton-calculadora-cero{
+	width: 150px;
+}
+
+.gato{
+	font-family: 'Oswald', sans-serif;
+}
+
+.mensaje{
+	width: 500px;
+	height: auto;
+	font-size: 1.75em;
+	text-align: center;
+}
+
+.mensaje > div > div{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.mensaje button{
+	width: 30%;
+	height: auto;
+	padding: 5px;
+	font-size: 0.7em;
+	text-align: center;
+}
+
+.estadoPartida{
+	margin-bottom: 25px;
+}
+
+.estadoPartida p{
+	font-size: 2em;
+	text-align: center;
+	margin: 0;
+}
+
+.estadoPartida p:first-child{
+	color: #FFFFFF;
+}
+
+.jugador1{
+	color: aqua;
+}
+
+.jugador2{
+	color: brown;
+}
+
+.tablero{
+	width: 450px;
+	height: 450px;
+	border-spacing: 0;
+	background-color: rgb(112, 112, 112);
+}
+
+.tablero td{
+	border: 1px solid;
+	text-align: center;
+	font-size: 3.5em;
+	color: #FFFFFF;
+	cursor: pointer;
 }
 
 footer{

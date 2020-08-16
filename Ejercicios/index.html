@@ -22,21 +22,21 @@
 		</div>
 	</header>
 
-	<nav>
-		<div>
+	<nav id="navegacion">
+		<div v-on:click="aparecerCalculadora">
 			<h2>Calculadora</h2>
 		</div>
-		<div>
+		<div v-on:click="aparecerConvertidor">
 			<h2>Convertidor de divisa</h2>
 		</div>
-		<div>
+		<div v-on:click="aparecerGato">
 			<h2>Gato (3 en raya)</h2>
 		</div>
 	</nav>
 
 	<section>
-		<div id="calculadora">
-			<table>
+		<div id="calculadora" v-if="vista">
+			<table class="calculadora">
 				<tbody>
 					<tr class="pantalla1">
 						<td colspan="4">{{pantallaSec}}</td>
@@ -45,32 +45,32 @@
 						<td colspan="4">{{pantallaPrin}}</td>
 					</tr>
 					<tr>
-						<td class="boton operacion" v-on:click="operar('/')">/</td>
-						<td class="boton operacion" v-on:click="operar('*')">*</td>
-						<td class="boton operacion" v-on:click="borrarCaracter"><-</td>
-						<td class="boton operacion" v-on:click="limpiarPantallas">C</td>
+						<td class="boton-calculadora operacion" v-on:click="operar('/')">/</td>
+						<td class="boton-calculadora operacion" v-on:click="operar('*')">*</td>
+						<td class="boton-calculadora operacion" v-on:click="borrarCaracter"><-</td>
+						<td class="boton-calculadora operacion" v-on:click="limpiarPantallas">C</td>
 					</tr>
 					<tr>
-						<td class="boton" v-on:click="obtenerNumero(7)">7</td>
-						<td class="boton" v-on:click="obtenerNumero(8)">8</td>
-						<td class="boton" v-on:click="obtenerNumero(9)">9</td>
-						<td class="boton operacion" v-on:click="operar('-')">-</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(7)">7</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(8)">8</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(9)">9</td>
+						<td class="boton-calculadora operacion" v-on:click="operar('-')">-</td>
 					</tr>
 					<tr>
-						<td class="boton" v-on:click="obtenerNumero(4)">4</td>
-						<td class="boton" v-on:click="obtenerNumero(5)">5</td>
-						<td class="boton" v-on:click="obtenerNumero(6)">6</td>
-						<td class="boton operacion" v-on:click="operar('+')">+</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(4)">4</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(5)">5</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(6)">6</td>
+						<td class="boton-calculadora operacion" v-on:click="operar('+')">+</td>
 					</tr>
 					<tr>
-						<td class="boton" v-on:click="obtenerNumero(1)">1</td>
-						<td class="boton" v-on:click="obtenerNumero(2)">2</td>
-						<td class="boton" v-on:click="obtenerNumero(3)">3</td>
-						<td class="boton operacion" v-on:click="obtenerResul" rowspan="2">=</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(1)">1</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(2)">2</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(3)">3</td>
+						<td class="boton-calculadora operacion" v-on:click="obtenerResul" rowspan="2">=</td>
 					</tr>
 					<tr>
-						<td class="boton" v-on:click="obtenerNumero(0)" colspan="2">0</td>
-						<td class="boton" v-on:click="obtenerNumero('.')">.</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero(0)" colspan="2">0</td>
+						<td class="boton-calculadora" v-on:click="obtenerNumero('.')">.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -91,6 +91,35 @@
 			</form>
 		</div>
 		-->
+
+		<div id="gato" class="gato" v-if="vista">
+			<div class="mensaje" v-if="vistaMensaje">
+				<div>
+					<p>{{parrafoMensaje}}</p>
+					<div v-if="vistaBotonesJug">
+						<button type="button" v-on:click="seleccionarJugadores(false)">{{boton1}}</button>
+						<button type="button" v-on:click="seleccionarJugadores(true)">{{boton2}}</button>
+					</div>
+					<div v-if="vistaBotonesSim">
+						<button type="button" v-on:click="seleccionarSimbolo(false)">{{boton1}}</button>
+						<button type="button" v-on:click="seleccionarSimbolo(true)">{{boton2}}</button>
+					</div>
+				</div>
+			</div>
+			<div class="partida" v-if="vistaPartida">
+				<div class="estadoPartida">
+					<p>{{mensajeEstado}}</p>
+					<p v-bind:class="{ jugador1: jugador1, jugador2: jugador2 }">{{mensajeTurno}}</p>
+				</div>
+				<table class="tablero">
+					<tbody>
+						<tr v-for="fila in tablero">
+							<td v-for="columna in fila" v-on:click="tirar" v->{{columna}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</section>
 
 	<footer>
