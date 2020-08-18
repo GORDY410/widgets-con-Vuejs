@@ -76,8 +76,7 @@
 			</table>
 		</div>
 
-		<!--
-		<div id="divisa">
+		<div id="divisa" v-if="vista">
 			<form>
 				<div>
 					<label>Dolares:</label>
@@ -90,7 +89,6 @@
 				<button>Convertir</button>
 			</form>
 		</div>
-		-->
 
 		<div id="gato" class="gato" v-if="vista">
 			<div class="mensaje" v-if="vistaMensaje">
@@ -100,7 +98,7 @@
 						<button type="button" v-on:click="seleccionarJugadores(false)">{{boton1}}</button>
 						<button type="button" v-on:click="seleccionarJugadores(true)">{{boton2}}</button>
 					</div>
-					<div v-if="vistaBotonesSim">
+					<div v-else>
 						<button type="button" v-on:click="seleccionarSimbolo(false)">{{boton1}}</button>
 						<button type="button" v-on:click="seleccionarSimbolo(true)">{{boton2}}</button>
 					</div>
@@ -109,15 +107,18 @@
 			<div class="partida" v-if="vistaPartida">
 				<div class="estadoPartida">
 					<p>{{mensajeEstado}}</p>
-					<p v-bind:class="{ jugador1: jugador1, jugador2: jugador2 }">{{mensajeTurno}}</p>
+					<p v-bind:class="{ jugador1: !turno, jugador2: turno, ganador: ganador }">{{mensajeTurno}}</p>
 				</div>
 				<table class="tablero">
 					<tbody>
-						<tr v-for="fila in tablero">
-							<td v-for="columna in fila" v-on:click="tirar" v->{{columna}}</td>
+						<tr v-for="fila in 3">
+							<td v-for="columna in 3" v-on:click="tirar(fila-1, columna-1)">
+								{{tablero[3*(fila-1)+columna-1]}}
+							</td>
 						</tr>
 					</tbody>
 				</table>
+				<button type="button" v-if="ganador" v-on:click="reiniciar">Reiniciar</button>
 			</div>
 		</div>
 	</section>

@@ -3,6 +3,10 @@ body{
 	font-size: 1em;
 }
 
+
+/*--------------------------- ESTILO DE HEADER ---------------------------*/
+
+
 header{
 	width: 100%;
 	height: auto;
@@ -16,6 +20,10 @@ header > div > h3{
 	font-family: 'Oswald', sans-serif;
 	font-size: 1.25em;
 }
+
+
+/*-------------------- ESTILO DE BARRA DE NAVEGACIÓN --------------------*/
+
 
 nav{
 	width: 100%;
@@ -49,6 +57,10 @@ nav > div > h2{
 	color: #FFFFFF;
 }
 
+
+/*------------------------ ESTILO DE SECCIÓN PRINCIPAL ------------------------*/
+
+
 section{
 	width: 100%;
 	height: auto;
@@ -57,6 +69,10 @@ section{
 	justify-content: center;
 	background-color: rgb(162, 13, 221);
 }
+
+
+/*--------------------------- ESTILO DE CALCULADORA ---------------------------*/
+
 
 .calculadora{
 	width: 300px;
@@ -126,6 +142,10 @@ section{
 	width: 150px;
 }
 
+
+/*--------------------------- ESTILO DE GATO ---------------------------*/
+
+
 .gato{
 	font-family: 'Oswald', sans-serif;
 }
@@ -134,6 +154,7 @@ section{
 	width: 500px;
 	height: auto;
 	font-size: 1.75em;
+	color: #FFFFFF;
 	text-align: center;
 }
 
@@ -151,6 +172,12 @@ section{
 	text-align: center;
 }
 
+.partida{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .estadoPartida{
 	margin-bottom: 25px;
 }
@@ -166,11 +193,15 @@ section{
 }
 
 .jugador1{
-	color: aqua;
+	color: rgb(16, 247, 247);
 }
 
 .jugador2{
-	color: brown;
+	color: rgb(235, 252, 5);
+}
+
+.ganador{
+	color: rgb(5, 255, 5);
 }
 
 .tablero{
@@ -181,12 +212,27 @@ section{
 }
 
 .tablero td{
+	width: 150px;
+	height: 150px;
 	border: 1px solid;
 	text-align: center;
 	font-size: 3.5em;
 	color: #FFFFFF;
 	cursor: pointer;
 }
+
+.partida > button{
+	width: 40%;
+	height: auto;
+	padding: 5px;
+	margin-top: 1em;
+	font-size: 1.25em;
+	text-align: center;
+}
+
+
+/*--------------------------- ESTILO DE FOOTER ---------------------------*/
+
 
 footer{
 	width: 100%;

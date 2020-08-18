@@ -144,6 +144,14 @@ var calculadora = new Vue({
 	}
 });
 
+var conversor = new Vue({
+	el: '#divisa',
+
+	data: {
+		vista: false
+	}
+});
+
 var gato = new Vue({
 	el: '#gato',
 
@@ -155,12 +163,13 @@ var gato = new Vue({
 		boton1: '',
 		boton2: '',
 		jugadores: false,
-		jugador1: true,
-		jugador2: false,
+		turno: false,
+		turnos: 0,
+		ganador: false,
 		simbolos: [ , ],
-		tablero: [ ['', '', ''],
-			['', '', ''],
-			['', '', ''] ],
+		tablero: [ '', '', '',
+			'', '', '',
+			'', '', '' ],
 
 		vista: false,
 		vistaPartida: false,
@@ -196,7 +205,6 @@ var gato = new Vue({
 			this.boton2 = 'O (Circulo)';
 
 			this.vistaBotonesJug = false;
-			this.vistaBotonesSim = true;
 		},
 
 		seleccionarSimbolo: function( opcion ){
@@ -214,47 +222,173 @@ var gato = new Vue({
 				this.simbolos[1] = 'O';
 			}
 
-			this.mensajeEstado = 'Jugador 1: ' + '"' + this.simbolos[0] + '"';
-			if( this.jugadores ){
-				this.mensajeEstado += ' Jugador 2: ' + '"' + this.simbolos[1] + '"';
-			}else{
-				this.mensajeEstado += ' Computadora: ' + '"' + this.simbolos[1] + '"';
-			}
+			this.generarPrimerTurno();
 
-			this.mensajeTurno = 'Jugador 1 es tu turno';
+			if( this.jugadores ){
+				this.mensajeEstado = 'Jugador 1: ' + '"' + this.simbolos[0] + '"';
+				this.mensajeEstado += ' Jugador 2: ' + '"' + this.simbolos[1] + '"';
+
+				this.mensajeTurno = !this.turno ? 'Jugador 1 es tu turno' : 'Jugador 2 es tu turno';
+			}else{
+				this.mensajeEstado = 'Jugador: ' + '"' + this.simbolos[0] + '"';
+				this.mensajeEstado += ' Computadora: ' + '"' + this.simbolos[1] + '"';
+
+				if( this.turno ){
+					this.tirarComputadora();
+				}
+				this.mensajeTurno = 'Jugador es tu turno';
+				
+			}
 
 			this.vistaMensaje = false;
 			this.vistaPartida = true;
 		},
 
-		tirar: function(){
+		generarPrimerTurno: function(){
+			if( Math.floor(Math.random()*(2)) === 1 ){
+				this.turno = true;
+			}
+		},
 
-			if( turno ){
+		tirar: function( fila, columna ){
 
+			if( this.tablero[(3*fila)+columna] === '' && !this.ganador ){	// Verificar que no se sobreescriba una celda
+				if( !this.turno ){
+					Vue.set( this.tablero, (3*fila)+columna, this.simbolos[0] );
+				}else{
+					Vue.set( this.tablero, (3*fila)+columna, this.simbolos[1] );
+				}
+	
+				/*
+					Vue.set( this.tablero, (3*fila)+columna, 'X' );
+				La línea anterior hace que al cambiar el contenido de un array sea de manera reactiva,
+				es decir, que se actualice en tiempo real, el asignarlo de la manera:
+					this.tablero[(3*fila)+columna] = 'X';
+				no lo hace reactivo, por lo que no se actualizará en tiempo real la información
+				mostrada en el HTML.
+				*/
+
+				this.turnos++;
+
+				this.verificarGanador();
+
+				if( !this.ganador ){
+					this.turno = !this.turno;
+	
+					if( this.jugadores ){
+						this.mensajeTurno = !this.turno ? 'Jugador 1 es tu turno' : 'Jugador 2 es tu turno';
+					}else{
+						if( this.turno ){
+							this.tirarComputadora();
+						}
+					}
+				}
 			}
 
+		},
+
+		tirarComputadora: function(){
+			var fila, columna;
+
+			while( true ){
+				fila = Math.floor(Math.random()*(3));
+				columna = Math.floor(Math.random()*(3));
+
+				if( this.tablero[(3*fila)+columna] === '' ){
+					Vue.set( this.tablero, (3*fila)+columna, this.simbolos[1] );
+					this.turnos++;
+
+					this.verificarGanador();
+					this.turno = false;
+
+					break;
+				}
+			}
+
+		},
+
+		verificarGanador: function(){
+			var simbolo = this.turno ? this.simbolos[1] : this.simbolos[0];
+
+			// Ganar por fila
+			for( i = 0; i < 7 && !this.ganador; i += 3 ){
+				if( (this.tablero[i] === simbolo) && (this.tablero[i+1] === simbolo) && (this.tablero[i+2] === simbolo) ){
+					this.ganador = true;
+				}
+			}
+
+			// Ganar por columna
+			for( i = 0; i < 3 && !this.ganador; i++ ){
+				if( (this.tablero[i] === simbolo) && (this.tablero[i+3] === simbolo) && (this.tablero[i+6] === simbolo) ){
+					this.ganador = true;
+				}
+			}
+
+			// Ganar por diagonal
+			if( (this.tablero[0] === simbolo) && (this.tablero[4] === simbolo) && (this.tablero[8] === simbolo)  && !this.ganador ){
+				this.ganador = true;
+			}
+
+			if( (this.tablero[2] === simbolo) && (this.tablero[4] === simbolo) && (this.tablero[6] === simbolo) && !this.ganador ){
+				this.ganador = true;
+			}
+
+			if( this.ganador ){
+				if( !this.jugadores ){
+					this.mensajeTurno = !this.turno ? 'El Jugador ha ganador' : 'La computadora ha ganado';
+				}else{
+					this.mensajeTurno = !this.turno ? 'El Jugador 1 ha ganador' : 'El Jugador 2 ha ganado';
+				}
+			}else if( this.turnos === 9 && !this.ganador ){	// Se verifica si hay empate
+				this.ganador = true;
+				this.mensajeTurno = 'Empate';
+			}
+		},
+
+		reiniciar: function(){
+			this.parrafoMensaje = 'Número de jugadores:';
+			this.mensajeEstado = '';
+			this.mensajeTurno = '';
+
+			this.boton1 = '1 Jugador';
+			this.boton2 = '2 Jugadores';
+			this.jugadores = false;
+			this.turno = false;
+			this.turnos = 0;
+			this.ganador = false;
+			this.simbolos = [ , ];
+			this.tablero = [ '', '', '',
+				'', '', '',
+				'', '', '' ];
+
+			this.vista = true;
+			this.vistaPartida = false;
+			this.vistaMensaje = true;
+			this.vistaBotonesJug = true;
+			this.vistaBotonesSim = false;
 		}
 	}
 });
 
 var navegacion = new Vue({
 	el: '#navegacion',
+
 	methods: {
 		aparecerCalculadora: function(){
 			calculadora.vista = true;
-
+			conversor.vista = false;
 			gato.vista = false;
 		},
 
 		aparecerConvertidor: function(){
 			calculadora.vista = false;
-
+			conversor.vista = true;
 			gato.vista = false;
 		},
 
 		aparecerGato: function(){
 			calculadora.vista = false;
-
+			conversor.vista = false;
 			gato.vista = true;
 		}
 	}
