@@ -145,10 +145,61 @@ var calculadora = new Vue({
 });
 
 var conversor = new Vue({
-	el: '#divisa',
+	el: '#conversor',
 
 	data: {
+		conversionMensaje: '',
+		unidadConvertir: '',
+		unidadConvertida: '',
+		patron: '',
+
+		valorConvertir: 0,
+		valorConvertido: 0,
+
 		vista: false
+	},
+
+	created: function(){
+		this.conversionMensaje = 'bits a Bytes';
+		this.unidadConvertir = 'bits';
+		this.unidadConvertida = 'Bytes';
+
+		this.valorConvertir = Number(0);
+		this.valorConvertido = 0;
+
+		this.vista = false;
+	},
+
+	methods: {
+		cambiarUnidades: function(){
+			var unidadAux = this.unidadConvertida;
+			this.unidadConvertida = this.unidadConvertir;
+			this.unidadConvertir = unidadAux;
+
+			this.conversionMensaje = this.unidadConvertir + ' a ' + this.unidadConvertida;
+		},
+
+		convertir: function(){
+			if( typeof(this.valorConvertir) !== String ){
+				if( this.valorConvertir < 0 ){
+					alert('No se pueden convertir numeros negativos :/');
+				}else{
+					if( this.unidadConvertir === 'bits' ){
+						if( this.valorConvertir%1 === 0 ){
+							this.valorConvertido = this.valorConvertir/8;
+						}else{
+							alert('No se puede convertir punto decimal de un bit :(');
+						}
+					}else{
+						if( this.valorConvertir >= 0.125 ){
+							this.valorConvertido = this.valorConvertir*8;
+						}else{
+							alert('No se puede convertir punto decimal de un bit :(');
+						}
+					}
+				}
+			}
+		}
 	}
 });
 
