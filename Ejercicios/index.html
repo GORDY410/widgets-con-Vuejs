@@ -27,10 +27,10 @@
 			<h2>Calculadora</h2>
 		</div>
 		<div v-on:click="aparecerConvertidor">
-			<h2>Convertidor de divisa</h2>
+			<h2>Convertidor</h2>
 		</div>
 		<div v-on:click="aparecerGato">
-			<h2>Gato (3 en raya)</h2>
+			<h2>Gato (Tic tac toe)</h2>
 		</div>
 	</nav>
 
@@ -76,17 +76,21 @@
 			</table>
 		</div>
 
-		<div id="divisa" v-if="vista">
-			<form>
-				<div>
-					<label>Dolares:</label>
-					<input type="number">
+		<div id="conversor" v-if="vista">
+			<form class="conversor">
+				<h3>Convertir de {{conversionMensaje}}</h3>
+				<div class="campo">
+					<label>{{unidadConvertir}}</label>
+					<input type="number" min="0" v-model.number="valorConvertir" v-on:keyup.enter="convertir">
 				</div>
-				<div>
-					<label>Pesos:</label>
-					<input type="number">
+				<div class="campo">
+					<label>{{unidadConvertida}}</label>
+					<input type="text" v-model="valorConvertido" disabled>
 				</div>
-				<button>Convertir</button>
+				<div class="botones">
+					<button type="button" v-on:click="cambiarUnidades">Cambiar</button>
+					<button type="button" v-on:click="convertir">Convertir</button>
+				</div>
 			</form>
 		</div>
 
