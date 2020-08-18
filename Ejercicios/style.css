@@ -4,7 +4,7 @@ body{
 }
 
 
-/*--------------------------- ESTILO DE HEADER ---------------------------*/
+/*--------------------------- HEADER ---------------------------*/
 
 
 header{
@@ -22,7 +22,7 @@ header > div > h3{
 }
 
 
-/*-------------------- ESTILO DE BARRA DE NAVEGACIÓN --------------------*/
+/*-------------------- BARRA DE NAVEGACIÓN --------------------*/
 
 
 nav{
@@ -58,7 +58,7 @@ nav > div > h2{
 }
 
 
-/*------------------------ ESTILO DE SECCIÓN PRINCIPAL ------------------------*/
+/*------------------------ SECCIÓN PRINCIPAL ------------------------*/
 
 
 section{
@@ -71,7 +71,7 @@ section{
 }
 
 
-/*--------------------------- ESTILO DE CALCULADORA ---------------------------*/
+/*--------------------------- CALCULADORA ---------------------------*/
 
 
 .calculadora{
@@ -143,7 +143,47 @@ section{
 }
 
 
-/*--------------------------- ESTILO DE GATO ---------------------------*/
+/*--------------------------- CONVERSOR ---------------------------*/
+
+.conversor{
+	font-family: 'Oswald', sans-serif;
+	color: #FFFFFF;
+}
+
+.conversor > h3{
+	font-size: 2em;
+	text-align: center;
+}
+
+.campo{
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.5em;
+}
+
+.campo > input{
+	padding-left: 15px;
+	padding-right: 10px;
+	border: 1px solid white;
+	border-radius: 10px;
+	background-color: rgb(255, 255, 255, 0.5);
+	color: #51007A;
+}
+
+.botones{
+	display: flex;
+	justify-content: space-around;
+	color: #51007A;
+}
+
+.botones > button{
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.25em;
+}
+
+
+/*--------------------------- GATO (TIC TAC TOE) ---------------------------*/
 
 
 .gato{
@@ -231,7 +271,7 @@ section{
 }
 
 
-/*--------------------------- ESTILO DE FOOTER ---------------------------*/
+/*--------------------------- FOOTER ---------------------------*/
 
 
 footer{
